@@ -1,6 +1,8 @@
 PlayersList = new Mongo.Collection('players');
 import { Template } from 'meteor/templating';
 
+Meteor.subscribe('thePlayers');
+
 Template.leaderboard.helpers({
   'player': function(){
     var currentUserId = Meteor.userId();
