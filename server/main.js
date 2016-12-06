@@ -23,10 +23,19 @@ Meteor.startup(() => {
       check(selectedPlayer, String);
       var currentUserId = Meteor.userId();
       if(currentUserId){
-          PlayersList.remove({ _id: selectedPlayer, createdBy: currentUserId });
+        PlayersList.remove({ _id: selectedPlayer, createdBy: currentUserId });
       }
-    }
+    },
+    'updateScore': function(selectedPlayer, scoreValue){
+      check(selectedPlayer, String);
+      check(scoreValue, Number);
+      var currentUserId = Meteor.userId();
+      if(currentUserId){
+        PlayersList.update( { _id: selectedPlayer, createdBy: currentUserId },
+          { $inc: {score: scoreValue} });
+        }
+      }
+    });
   });
-});
 
 PlayersList = new Mongo.Collection('players');

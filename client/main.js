@@ -29,11 +29,11 @@ Template.leaderboard.events({
   },
   'click .increment': function(){
     var selectedPlayer = Session.get('selectedPlayer');
-    PlayersList.update({ _id: selectedPlayer }, { $inc: {score: 5} });
+    Meteor.call('updateScore', selectedPlayer, 5);
   },
   'click .decrement': function(){
     var selectedPlayer = Session.get('selectedPlayer');
-    PlayersList.update({ _id: selectedPlayer }, {$inc: {score: -5} });
+    Meteor.call('updateScore', selectedPlayer, -5);
   },
   'click .remove': function(){
     var selectedPlayer = Session.get('selectedPlayer');
