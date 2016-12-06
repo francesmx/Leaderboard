@@ -37,7 +37,7 @@ Template.leaderboard.events({
   },
   'click .remove': function(){
     var selectedPlayer = Session.get('selectedPlayer');
-    PlayersList.remove({ _id: selectedPlayer });
+    Meteor.call('removePlayer', selectedPlayer);
 }
 });
 

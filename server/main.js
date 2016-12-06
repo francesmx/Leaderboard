@@ -9,12 +9,22 @@ Meteor.startup(() => {
 
   Meteor.methods({
     'createPlayer': function(playerNameVar){
-        var currentUserId = Meteor.userId();
+      check(playerNameVar, String);
+      var currentUserId = Meteor.userId();
+      if(currentUserId){
         PlayersList.insert({
-            name: playerNameVar,
-            score: 0,
-            createdBy: currentUserId
+          name: playerNameVar,
+          score: 0,
+          createdBy: currentUserId
         });
+      }
+    },
+    'removePlayer': function(selectedPlayer){
+      check(selectedPlayer, String);
+      var currentUserId = Meteor.userId();
+      if(currentUserId){
+          PlayersList.remove({ _id: selectedPlayer, createdBy: currentUserId });
+      }
     }
   });
 });
